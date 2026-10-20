@@ -1,0 +1,175 @@
+{
+  "added": [
+    "--message-format json",
+    "--config target.<host>.runner=[\"sh\",\"-c\",\"case \\\"${0##*/}\\\" in rust_out) exec \\\"$0\\\" \\\"$@\\\";; esac; exec env RUSTC_BOOTSTRAP=1 \\\"$0\\\" \\\"$@\\\" -Z unstable-options --format json --report-time\"]"
+  ],
+  "argv": [
+    "test",
+    "--message-format",
+    "json",
+    "--config",
+    "target.<host>.runner=[\"sh\",\"-c\",\"case \\\"${0##*/}\\\" in rust_out) exec \\\"$0\\\" \\\"$@\\\";; esac; exec env RUSTC_BOOTSTRAP=1 \\\"$0\\\" \\\"$@\\\" -Z unstable-options --format json --report-time\"]",
+    "--no-fail-fast"
+  ],
+  "build": {
+    "counts": {
+      "error": 0,
+      "warning": 1
+    },
+    "diagnostics": [
+      {
+        "code": "unused_variables",
+        "col": 9,
+        "file": "src/lib.rs",
+        "level": "warning",
+        "line": 5,
+        "message": "unused variable: `unused`",
+        "package": "mixed",
+        "rendered": "warning: unused variable: `unused`\n --> src/lib.rs:5:9\n  |\n5 |     let unused = 1;\n  |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_unused`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\n",
+        "suggestion": "_unused"
+      }
+    ],
+    "success": true,
+    "units": {
+      "compiled": 4,
+      "fresh": 0
+    }
+  },
+  "exit_code": 101,
+  "notes": [
+    "doctests run without libtest JSON (rustdoc's harness takes no libtest flags on stable, so the runner passes them through untouched); they are reported structured: false"
+  ],
+  "outcome": "test_failed",
+  "request": {
+    "args": [],
+    "config": [],
+    "env_allowlist": {},
+    "features": {
+      "all": false,
+      "list": [],
+      "no_default": false
+    },
+    "globals": {
+      "config": [],
+      "directory": null,
+      "passthrough": [],
+      "unstable": []
+    },
+    "help": false,
+    "manifest_path": null,
+    "message_format": [],
+    "passthrough": [],
+    "profile": null,
+    "selection": {
+      "exclude": [],
+      "packages": [],
+      "workspace": false
+    },
+    "target_dir": null,
+    "target_triples": [],
+    "targets": {
+      "all_targets": false,
+      "bench": [],
+      "benches": false,
+      "bin": [],
+      "bins": false,
+      "doc": false,
+      "example": [],
+      "examples": false,
+      "lib": false,
+      "test": [],
+      "tests": false
+    },
+    "test": {
+      "exact": false,
+      "fail_fast": false,
+      "filters": [],
+      "ignored": "exclude",
+      "no_run": false,
+      "nocapture": false,
+      "skip": [],
+      "threads": null
+    },
+    "toolchain": null,
+    "trailing": [],
+    "unstable": [],
+    "verb": "test"
+  },
+  "schema": "cargo-verdict/1",
+  "tests": {
+    "binaries": [
+      {
+        "duration_ms": 0,
+        "failed": 1,
+        "failures": [
+          {
+            "location": "src/lib.rs:17:9",
+            "name": "t::bad",
+            "output": "captured before the panic\n\nthread 't::bad' (N) panicked at src/lib.rs:17:9:\nboom\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+            "output_truncated_bytes": 0
+          }
+        ],
+        "filtered_out": 0,
+        "ignored": 1,
+        "kind": "unittests",
+        "output": null,
+        "output_truncated_bytes": 0,
+        "package": "mixed",
+        "passed": 1,
+        "structured": true,
+        "target": "mixed"
+      },
+      {
+        "duration_ms": 0,
+        "failed": 0,
+        "failures": [],
+        "filtered_out": 0,
+        "ignored": 0,
+        "kind": "test",
+        "output": null,
+        "output_truncated_bytes": 0,
+        "package": "mixed",
+        "passed": 1,
+        "structured": true,
+        "target": "it"
+      },
+      {
+        "duration_ms": null,
+        "failed": null,
+        "failures": [],
+        "filtered_out": null,
+        "ignored": null,
+        "kind": "test",
+        "output": "custom harness ran",
+        "output_truncated_bytes": 0,
+        "package": "mixed",
+        "passed": null,
+        "structured": false,
+        "target": "noharness"
+      },
+      {
+        "duration_ms": null,
+        "failed": 0,
+        "failures": [],
+        "filtered_out": 0,
+        "ignored": 0,
+        "kind": "doctest",
+        "output": "\nrunning 1 test\ntest src/lib.rs - two (line 1) ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in Xs\n",
+        "output_truncated_bytes": 0,
+        "package": "mixed",
+        "passed": 1,
+        "structured": false,
+        "target": null
+      }
+    ],
+    "totals": {
+      "failed": 1,
+      "filtered_out": 0,
+      "ignored": 1,
+      "measured": 0,
+      "passed": 3,
+      "unknown_binaries": 1
+    }
+  },
+  "want": "full"
+}

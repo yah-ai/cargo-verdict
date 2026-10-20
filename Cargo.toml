@@ -1,0 +1,57 @@
+[package]
+name = "cargo-verdict"
+version = "0.1.0"
+edition = "2021"
+authors = ["yah Dev <human@yah.dev>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yah-ai/cargo-verdict"
+description = "Structured cargo verdicts: one argv model for build/test requests, a planner that adds only output flags, and a versioned result schema over cargo's and libtest's JSON"
+keywords = ["cargo", "test", "json", "diagnostics", "ci"]
+readme = "README.md"
+categories = ["development-tools::cargo-plugins", "development-tools::testing"]
+# Held until R989-T25 creates the yah-ai/cargo-verdict mirror and cuts the
+# first release (name checked free on crates.io 2026-10-17, W371 §4.5).
+publish = false
+
+[lib]
+name = "cargo_verdict"
+path = "src/lib.rs"
+
+# `cargo verdict …` resolves to a binary named `cargo-verdict` on PATH; cargo
+# then invokes it as `cargo-verdict verdict …`.
+[[bin]]
+name = "cargo-verdict"
+path = "src/main.rs"
+
+[dependencies]
+# 0.19.2 is already in yah's root lockfile (W371 §4.3).
+cargo_metadata = "0.19"
+# The JSON Schema the MCP outputSchema uses (R989-F21); 1.2.1 is in yah's lockfile.
+schemars = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Reads cargo config files to compose with a target runner the camp sets
+# (R989-S3, W371 §4.4 case 3). 0.8 is the toml oss/qed and yah already lock.
+toml = { version = "0.8", default-features = false, features = ["parse"] }
+
+# An independent workspace: the yah root excludes `oss/`, and an explicit
+# table keeps this true once the subtree is exported standalone. No
+# `workspace = true` inheritance from yah's root, by CLAUDE.md's oss/ rule.
+[workspace]
+
+# --- profiles: keep in lockstep with the yah monorepo root Cargo.toml ---
+#
+# `exclude = ["oss", "external"]` in the root makes this a genuine separate
+# workspace, so it inherits NOTHING from it. Same block, same reasons, as
+# oss/qed/Cargo.toml and oss/orphan-gc/Cargo.toml document in full: disk
+# (line-tables-only, no dependency DWARF) and sccache (its key includes rustc
+# flags, so dependency flags must match the root's for cross-workspace hits).
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false
+opt-level = 1
+# W308/R745-T1: `-C incremental` makes sccache refuse a crate outright. This
+# glob applies to DEPENDENCIES and never to workspace members.
+incremental = false

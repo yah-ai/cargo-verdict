@@ -1,0 +1,13 @@
+# Fixture for tests/engine.rs: one warning, passing / failing / ignored unit
+# tests, a doctest, an integration test and a `harness = false` target.
+[package]
+name = "mixed"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[[test]]
+name = "noharness"
+harness = false

@@ -1,0 +1,15 @@
+# Fixture for tests/engine.rs's runner composition (R989-S3): unit tests, two
+# edition-2024 (merged) doctests, and a `harness = false` test that fails on
+# ANY argument, so a libtest flag reaching it is a visible failure. The tests
+# copy it under a directory whose .cargo/config.toml sets the camp's runner.
+[package]
+name = "runner"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[[test]]
+name = "strict"
+harness = false

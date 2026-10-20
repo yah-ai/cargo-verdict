@@ -1,0 +1,105 @@
+{
+  "added": [
+    "--message-format json"
+  ],
+  "argv": [
+    "check",
+    "--message-format",
+    "json"
+  ],
+  "build": {
+    "counts": {
+      "error": 1,
+      "warning": 0
+    },
+    "diagnostics": [
+      {
+        "code": "E0308",
+        "col": 5,
+        "file": "src/lib.rs",
+        "level": "error",
+        "line": 2,
+        "message": "mismatched types",
+        "package": "broken",
+        "rendered": "error[E0308]: mismatched types\n --> src/lib.rs:2:5\n  |\n1 | pub fn two() -> u32 {\n  |                 --- expected `u32` because of return type\n2 |     \"two\"\n  |     ^^^^^ expected `u32`, found `&str`\n\n",
+        "suggestion": null
+      }
+    ],
+    "success": false,
+    "units": {
+      "compiled": 0,
+      "fresh": 0
+    }
+  },
+  "exit_code": 101,
+  "notes": [],
+  "outcome": "build_failed",
+  "request": {
+    "args": [],
+    "config": [],
+    "env_allowlist": {},
+    "features": {
+      "all": false,
+      "list": [],
+      "no_default": false
+    },
+    "globals": {
+      "config": [],
+      "directory": null,
+      "passthrough": [],
+      "unstable": []
+    },
+    "help": false,
+    "manifest_path": null,
+    "message_format": [],
+    "passthrough": [],
+    "profile": null,
+    "selection": {
+      "exclude": [],
+      "packages": [],
+      "workspace": false
+    },
+    "target_dir": null,
+    "target_triples": [],
+    "targets": {
+      "all_targets": false,
+      "bench": [],
+      "benches": false,
+      "bin": [],
+      "bins": false,
+      "doc": false,
+      "example": [],
+      "examples": false,
+      "lib": false,
+      "test": [],
+      "tests": false
+    },
+    "test": {
+      "exact": false,
+      "fail_fast": true,
+      "filters": [],
+      "ignored": "exclude",
+      "no_run": false,
+      "nocapture": false,
+      "skip": [],
+      "threads": null
+    },
+    "toolchain": null,
+    "trailing": [],
+    "unstable": [],
+    "verb": "check"
+  },
+  "schema": "cargo-verdict/1",
+  "tests": {
+    "binaries": [],
+    "totals": {
+      "failed": 0,
+      "filtered_out": 0,
+      "ignored": 0,
+      "measured": 0,
+      "passed": 0,
+      "unknown_binaries": 0
+    }
+  },
+  "want": "failures"
+}
